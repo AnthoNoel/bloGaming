@@ -10,6 +10,10 @@
     {{ post.body }}
 </p>
 <footer>
-    <p>publié le {{ post.publishedAt|date('d/m/Y') }}</p>
+    <p>Publié le {{ post.publishedAt|date('d/m/Y') }}</p>
+    {% if post.author %}
+    <p>Ecrit par : {{post.Author.firstname}} {{post.Author.lastname}}</p>
+    {% endif %}
+    <p></p>
 </footer>
 {% endblock %}

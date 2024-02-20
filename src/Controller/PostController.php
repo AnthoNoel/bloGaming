@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
+use App\Entity\Comment;
 use App\Entity\Post;
+use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
@@ -83,7 +86,6 @@ class PostController extends AbstractController
         // attention dans le cas d'une API, on voudrait quand renvoyer du JSON
 
 
-
         return $this->render('post/read.html.twig', [
             'post' => $post,
         ]);;
@@ -121,5 +123,16 @@ class PostController extends AbstractController
         
     }
 
+    #[Route('/author/list', name: 'app_post_author', methods: "GET")]
+    public function authorList(AuthorRepository $authorRepository): Response
+    {
+        $authors = $authorRepository->findAll();
+        
+
+        // affiche le formulaire
+        return $this->render('post/list.html.twig', [
+            'authors' => $authors
+        ]);
+    }
     
 }

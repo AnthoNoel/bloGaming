@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+
+
+<h1>Liste des auteurs</h1>
+<ul>
+{% for currentAuthors in authors %}
+    <li><a href="{{path('app_post_read', {id: currentAuthors.id})}}">{{ currentAuthors.firstname }} {{ currentAuthors.lastname }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
