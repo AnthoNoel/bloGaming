@@ -17,21 +17,28 @@ class Post
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $body = null;
 
-    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[ORM\Column(options: ["unsigned" => true])]
     private ?int $nbLikes = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $publishedAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+
+    public function __construct()
+    {
+        
+        $this->createdAt = new \Datetime();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -66,7 +73,7 @@ class Post
         return $this->nbLikes;
     }
 
-    public function setNbLikes(?int $nbLikes): static
+    public function setNbLikes(int $nbLikes): static
     {
         $this->nbLikes = $nbLikes;
 
@@ -85,12 +92,12 @@ class Post
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -102,7 +109,7 @@ class Post
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
