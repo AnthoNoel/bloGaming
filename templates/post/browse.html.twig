@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('ok') %}
+    <div style="background-color:chartreuse;color:#f0f;border:5px dotted red;margin:1em; padding:1em;">
+        <marquee>{{ message }}</marquee>
+    </div>
+{% endfor %}
+
+<h1>Liste des articles</h1>
+<a href="{{ path('app_post_create') }}">Ajouter</a>
+<ul>
+{% for currentPost in postList %}
+    <li><a href="{{ path('app_post_read', {id: currentPost.id})}}">{{ currentPost.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

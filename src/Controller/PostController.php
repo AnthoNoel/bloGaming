@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -19,36 +20,73 @@ class PostController extends AbstractController
         $allPost = $postRepository->findAll();
 
         dump($allPost);
-        return $this->render('post/home.html.twig', [
+        return $this->render('post/browse.html.twig', [
             'postList' => $allPost,
         ]);
     }
 
-    #[Route('/post/create', name: 'app_post_create')]
-    public function createPost(EntityManagerInterface $entityManager): Response
+    #[Route('/post/create', name: 'app_post_create', methods: "GET")]
+    public function addPost(): Response
     {
         
-        $post = new Post();
-        $post->setTitle(uniqid('title-'));
-        $post->setBody('body-');
-
-        // on demande à l'entity manager de prendre en compte cette entité
-        $entityManager->persist($post);
-
-
-        // on demande à l'entity manager d'exécuter les requêtes
-        $entityManager->flush();
-
-        dd($post);
-        return new Response();
+        // affiche le formulaire
+        return $this->render('post/add.html.twig');
     }
 
-    #[Route('/post/{id}', name: 'app_post_read')]
-    public function read(PostRepository $postRepository, int $id): Response
+    #[Route('/post/create', name: 'app_post_create_process', methods: "POST")]
+    public function addProcess(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $post = $postRepository->find($id);
+        
+        // récupération des données
+        $title = $request->request->get('title');
+        $body = $request->request->get('body');
+        $nbLikes = $request->request->get('nbLikes');
+        $publishedAt = $request->request->get('publishedAt');
+        $publishedAtObj = new DateTimeImmutable($publishedAt);
 
-        dd($post);
+        
+        // traitement du formulaire : ici ajout en BDD
+        $post = new Post();
+        $post->setTitle($title);
+        $post->setBody($body);
+        $post->setNbLikes($nbLikes);
+        $post->setPublishedAt($publishedAtObj);
+
+        // prise en compte de l'objet par Doctrine
+        $entityManager->persist($post);
+
+        // exécute les requêtes en BDD
+        $entityManager->flush();
+        
+
+        // TODO validation des données
+        // $messages['ok'][] = 'Post ajouté avec succès';
+        $this->addFlash('ok', 'Post ajouté avec succès');
+        $this->addFlash('ok', 'Non vraiment je suis fier de toi');
+        
+        // redirection
+        return $this->redirectToRoute('app_post');
+    }
+
+
+    #[Route('/post/{id<\d+>}', name: 'app_post_read')]
+    public function read(Post $post): Response
+    {
+         // le ParamConverter exécute ce code pour nous
+        // $post = $postRepository->find($id);
+        // if (is_null($post))
+        // {
+        //     return $this->createNotFoundException('post non trouvé');
+        // }
+        // si on arrive ici, c'est que le post existe.
+        // si le post n'existait pas, le ParamConverter génère automatiquement une 404
+        // attention dans le cas d'une API, on voudrait quand renvoyer du JSON
+
+
+
+        return $this->render('post/read.html.twig', [
+            'post' => $post,
+        ]);;
         
     }
 

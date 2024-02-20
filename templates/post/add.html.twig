@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_post') }}">Retour</a>
+<h1>Ajouter un post</h1>
+<form method='POST'>
+    <div>
+        Titre : <input type="text" name="title" />
+    </div>
+    <div>
+        Body : <textarea name="body">Préremplissage</textarea>
+    </div>
+    <div>
+        nbLikes : <input type="number" name="nbLikes" />
+    </div>
+    <div>
+        Date de publication : <input type="date" name="publishedAt" />
+    </div>
+    <button>Créer</button>
+</form>
+{% endblock %}

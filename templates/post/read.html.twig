@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_post') }}">Retour</a>
+<h1>{{ post.title}}</h1>
+<span>{{ post.nbLikes }} &hearts;</span>
+<p>
+    {{ post.body }}
+</p>
+<footer>
+    <p>publié le {{ post.publishedAt|date('d/m/Y') }}</p>
+</footer>
+{% endblock %}
