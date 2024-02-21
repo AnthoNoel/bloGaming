@@ -30,6 +30,7 @@ class Comment
     private ?\DateTimeImmutable $UpdatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Post $post = null;
 
     public function getId(): ?int

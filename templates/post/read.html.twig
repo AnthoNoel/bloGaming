@@ -1,19 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des articles{% endblock %}
+{% block title %}Liste des articles
+{% endblock %}
 
 {% block body %}
-<a href="{{ path('app_post') }}">Retour</a>
-<h1>{{ post.title}}</h1>
-<span>{{ post.nbLikes }} &hearts;</span>
-<p>
-    {{ post.body }}
-</p>
-<footer>
-    <p>Publié le {{ post.publishedAt|date('d/m/Y') }}</p>
-    {% if post.author %}
-    <p>Ecrit par : {{post.Author.firstname}} {{post.Author.lastname}}</p>
-    {% endif %}
-    <p></p>
-</footer>
+	<a href="{{ path('app_post') }}">Retour</a>
+	<h1>{{ post.title}}</h1>
+	<span>{{ post.nbLikes }}
+		&hearts;</span>
+	<p>
+		{{ post.body }}
+	</p>
+	<footer>
+		<p>Publié le
+			{{ post.publishedAt|date('d/m/Y') }}</p>
+		{% if post.author %}
+			<p>Ecrit par :
+				{{post.Author.firstname}}
+				{{post.Author.lastname}}</p>
+		{% endif %}
+
+		<h2>Commentaires</h2>
+		{% for currentComment in post.comments %}
+			<div>
+				<h3>{{ currentComment.userName }}</h3>
+				{{ currentComment.body }}
+                <small>| publié le {{ currentComment.publishedAt|date('d/m/Y') }}</small>
+			</div>
+		{% else %}
+			<p>Aucun commentaire actuellement</p>
+		{% endfor %}
+	</footer>
 {% endblock %}

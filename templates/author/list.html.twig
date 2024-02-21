@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+
+
+<h1>Liste des auteurs</h1>
+<ul>
+    {% for currentAuthor in authors %}
+    <li>
+        {{ currentAuthor.firstName }} {{ currentAuthor.lastName }}
+        {% if currentAuthor.posts|length > 0 %}
+        <ul>
+            {% for currentPost in currentAuthor.posts %}
+            <li><a href="{{ path('app_post_read', {id: currentPost.id}) }}">{{ currentPost.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Pas d'article disponible pour cet auteur</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

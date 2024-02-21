@@ -123,16 +123,6 @@ class PostController extends AbstractController
         
     }
 
-    #[Route('/author/list', name: 'app_post_author', methods: "GET")]
-    public function authorList(AuthorRepository $authorRepository): Response
-    {
-        $authors = $authorRepository->findAll();
-        
 
-        // affiche le formulaire
-        return $this->render('post/list.html.twig', [
-            'authors' => $authors
-        ]);
-    }
-    
+
 }
