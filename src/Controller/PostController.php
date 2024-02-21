@@ -123,6 +123,33 @@ class PostController extends AbstractController
         
     }
 
+    #[Route('/{id<\d+>}/comment/add', name: 'app_comment_add', methods:["POST"])]
+    public function commentAdd(EntityManagerInterface $em, Post $post, Request $request): Response
+    {
+        // récupérer les données
+        $userName = $request->request->get('username');
+        $body = $request->request->get('body');
 
+        // valider les données
+
+        // traiter le formulaire
+        $comment = new Comment();
+        $comment->setUserName($userName);
+        $comment->setBody($body);
+        $comment->setCreatedAt(new DateTimeImmutable());
+
+        $comment->setPost($post);
+
+        // on informe doctrine qu'il y a une nouvelle entité à gérer
+        $em->persist($comment);
+
+        // on lance les requetes de mise à jour
+        $em->flush();
+
+        // TODO ajouter un message flash
+
+        // rediriger
+        return $this->redirectToRoute('app_post_read', ["id" => $post->getId()]);
+    }
 
 }
