@@ -1,0 +1,237 @@
+body {
+    background-color:#2D033A;
+    margin: 0;
+    padding: 0;
+    color: white
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+
+.header {
+    text-transform: uppercase;
+    display: inline-block;                /* déclare le modèle de "boite en ligne" */
+    padding-left: 100%;                 /* placement du texte défilant à droite du contenant  p  */
+    white-space: nowrap;              /* pas de passage à la ligne */
+    padding-right: 50px;                /* facultatif ; crée une attente à la réapparition */
+    animation: param 20s infinite linear; 
+    font-family: "Honk";
+    font-size: xx-large;
+}
+
+.header:hover {         /* facultatif ; crée un arrêt au survol */
+    animation-play-state: paused;
+}
+
+@keyframes param {
+    0% {transform: translate(0,0);}  
+    100% {transform: translate(-100%,0);}
+    } 
+
+
+h3 {
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 2em;
+}
+
+
+.article { 
+    
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.2em;
+    text-align: left;
+    margin-top: 2em;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+   
+}
+
+.articleMain{
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+   
+}
+
+.articleContenair {
+    display: flex;
+    align-items: center;
+    margin-right: 2em;
+}
+
+.articleContent {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width : 25%;
+    border: 2px solid blue;
+    border-radius: 10px;
+    margin-top: 2em;
+    padding : 1em;
+    box-shadow: 10px 5px 5px blue;
+    transition: transform .1s;
+}
+
+ 
+ @media (max-width: 1500px) { 
+    .articleMain{
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+            justify-content: center;
+            align-items: center;
+        }
+      
+ }
+
+ 
+
+
+.articleContent:hover{
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1);
+}
+header {
+    background-image: url('https://media.sproutsocial.com/uploads/3b_youtube-cover-photo_clean@1x-1.png');
+    background-position: center;
+    background-size: 2000px;
+    margin-top: 0;
+    background-repeat: no-repeat;
+    height: 250px;
+}
+.imageMain {
+    margin: 2em;
+    width: 300px;
+    height: 150px;
+}
+
+.imageArticle{
+    margin: 2em;
+    width: 700px;
+    height: 500px;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.footerArticle {
+    margin-top: 2em;
+    text-align: right;
+  
+}
+
+.comment, .addComment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3em;
+    text-align: center;
+    
+}
+
+.addComment {
+    width: 25%;
+    margin: auto;
+}
+
+p{
+    margin: 0;
+}
+
+.imageArticle {
+    text-align: center;
+}
+
+.addComment {
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 2em;
+}
+
+.commentAdd {
+    width : 50%;
+    margin-top: 2em;
+}
+
+.commented{
+    border: 1px solid white ;
+    border-radius: 50px;
+    padding: 1em;
+    margin: 1em;
+    width: 50%;
+}
+
+.author {
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    line-height: 300%;
+    margin: auto;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    
+}
+.imageAuthor {
+    width: 300px;
+    height: 300px;
+}
+
+textarea, input {
+
+    padding:3px;
+    border:1px solid #F5C5C5;
+    border-radius:5px;
+    width:200px;
+    box-shadow:1px 1px 2px #C0C0C0 inset;
+    margin: 1em;
+}
+
+button {
+    display: inline-block;
+    background-color: purple;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: #eeeeee;
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    padding: 20px;
+    width: 100px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  button:hover {
+    background-color: blue;
+  }
+
+  /* .addArticle {
+    margin-left: 93%;
+    margin-top: 2em;
+  } */
+  @media (min-width: 1500px) { 
+    .addArticle {
+        margin-left: 93%;
+        
+      }
+      
+ }

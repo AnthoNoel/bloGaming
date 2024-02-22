@@ -4,44 +4,38 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_post') }}">Retour</a>
+	<button class="back">
+		<a href="{{ path('app_post') }}">Retour</a>
+	</button>
 	<h1>{{ post.title}}</h1>
-	<span>{{ post.nbLikes }}
-		&hearts;</span>
-	<p>
-		{{ post.body }}
-	</p>
-	<footer>
-		<p>Publié le
-			{{ post.publishedAt|date('d/m/Y') }}</p>
-		{% if post.author %}
-			<p>Ecrit par :
-				{{post.Author.firstname}}
-				{{post.Author.lastname}}</p>
-		{% endif %}
-
-		<h2>Commentaires</h2>
-
-		<form method="POST" action="{{ path('app_comment_add', {id: post.id})}}">
-			<fieldset>
-				<legend>Ajouter un commentaire</legend>
-				<div>
-					<label>pseudo
-						<input type="text" name="username"></pseudo>
-				</div>
-				<div>
-					<label>Commentaire
-						<textarea name="body"></textarea>
-					</label>
-				</div>
-				<div>
-					<button>Commenter</button>
-				</div>
-			</fieldset>
-		</form>
-		{% for currentComment in post.comments %}
+	<br>
+	<article class="articleContenair">
 			<div>
-				<h3>{{ currentComment.userName }}</h3>
+				<img class="imageArticle" src="{{ asset(post.poster) }}" alt="Image Article">
+			</div>
+		<div class="article">
+			<p>
+				{{ post.body }}
+			</p>
+			<div class="footerArticle">
+				<p>Publié le
+					{{ post.publishedAt|date('d/m/Y') }}</p>
+				{% if post.author %}
+					<p>Ecrit par :
+						{{post.Author.firstname}}
+						{{post.Author.lastname}}</p>
+				{% endif %}
+				<span>{{ post.nbLikes }}
+					&hearts;</span>
+			</div>
+		</div>
+	</article>
+
+	<div class="comment">
+		<h3>Commentaires</h3>
+		{% for currentComment in post.comments %}
+			<div class ="commented">
+				<h4>{{ currentComment.userName }}</h4>
 				{{ currentComment.body }}
 				<small>| publié le
 					{{ currentComment.publishedAt|date('d/m/Y') }}</small>
@@ -49,5 +43,29 @@
 		{% else %}
 			<p>Aucun commentaire actuellement</p>
 		{% endfor %}
+	</div>
+
+	<footer>
+		<div class="addComment">
+
+
+			<form method="POST" action="{{ path('app_comment_add', {id: post.id})}}">
+				<fieldset>
+					<legend>Ajouter un commentaire</legend>
+					<div>
+						<label>Pseudo
+							<input type="text" name="username"></pseudo>
+					</div>
+					<div>
+						<label>Commentaire
+							<textarea name="body"></textarea>
+						</label>
+					</div>
+					<div>
+						<button class="commentAdd">Commenter</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
 	</footer>
 {% endblock %}

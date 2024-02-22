@@ -2,6 +2,7 @@
 
 {% block title %}Liste des articles{% endblock %}
 
+
 {% block body %}
 
 {% for message in app.flashes('ok') %}
@@ -10,13 +11,19 @@
     </div>
 {% endfor %}
 
-<h1>Liste des articles</h1>
-<a href="{{ path('app_post_create') }}">Ajouter</a>
-<ul>
+<h3>Liste de nos articles</h3>
+<button class="addArticle"><a href="{{ path('app_post_create') }}">Ajouter</a></button>
+    <article class="articleMain">
 {% for currentPost in postList %}
-    <li><a href="{{ path('app_post_read', {id: currentPost.id})}}">{{ currentPost.title }}</a></li>
+    <div class="articleContent">
+    {% if currentPost.poster %}
+    <img class ="imageMain" src="{{ asset(currentPost.poster) }}" alt="">
+    {% endif %}
+    <a href="{{ path('app_post_read', {id: currentPost.id})}}">{{ currentPost.title }}</a>
+    </div>
 {% endfor %}
-</ul>
+    </article>
+
 
 <h3><a href="{{ path('app_post_author') }}">Liste des auteurs</a></h3>
 

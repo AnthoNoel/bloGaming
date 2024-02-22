@@ -6,14 +6,15 @@
 
 
 <h1>Liste des auteurs</h1>
-<ul>
+<ul class ="author">
     {% for currentAuthor in authors %}
     <li>
+        <img class ="imageAuthor" src="{{ asset(currentAuthor.poster) }}" alt="">
         {{ currentAuthor.firstName }} {{ currentAuthor.lastName }}
         {% if currentAuthor.posts|length > 0 %}
         <ul>
             {% for currentPost in currentAuthor.posts %}
-            <li><a href="{{ path('app_post_read', {id: currentPost.id}) }}">{{ currentPost.title }}</a></li>
+            <li><a href="{{ path('app_post_read', {id: currentPost.id}) }}">-{{ currentPost.title }}</a></li>
             {% endfor %}
         </ul>
         {% else %}
