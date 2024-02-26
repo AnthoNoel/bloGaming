@@ -4,15 +4,17 @@
 {% endblock %}
 
 {% block body %}
-	<button class="back">
-		<a href="{{ path('app_post') }}">Retour</a>
-	</button>
+	<a href="{{ path('app_post') }}">
+		<button class="back">
+			Retour
+		</button>
+	</a>
 	<h1>{{ post.title}}</h1>
 	<br>
 	<article class="articleContenair">
-			<div>
-				<img class="imageArticle" src="{{ asset(post.poster) }}" alt="Image Article">
-			</div>
+		<div>
+			<img class="imageArticle" src="{{ asset(post.poster) }}" alt="Image Article">
+		</div>
 		<div class="article">
 			<p>
 				{{ post.body }}
@@ -34,7 +36,7 @@
 	<div class="comment">
 		<h3>Commentaires</h3>
 		{% for currentComment in post.comments %}
-			<div class ="commented">
+			<div class="commented">
 				<h4>{{ currentComment.userName }}</h4>
 				{{ currentComment.body }}
 				<small>| publié le

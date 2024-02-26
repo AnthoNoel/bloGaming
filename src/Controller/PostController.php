@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Author;
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Form\PostType;
 use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
 use DateTimeImmutable;
@@ -150,6 +151,18 @@ class PostController extends AbstractController
 
         // rediriger
         return $this->redirectToRoute('app_post_read', ["id" => $post->getId()]);
+    }
+
+    #[Route('/add2', name: 'add2', methods:"GET")]
+    public function add2(): Response
+    {
+
+        $post = New Post();
+        $form = $this->createForm(PostType::class, $post);
+        // affiche le formulaire
+        return $this->render('post/add2.html.twig', [
+            'formPost' => $form
+        ]);
     }
 
 }

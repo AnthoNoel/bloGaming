@@ -38,6 +38,10 @@ class Author
         $this->posts = new ArrayCollection();
     }
 
+    public function getFullName(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 
 
     public function getId(): ?int

@@ -12,7 +12,7 @@
 {% endfor %}
 
 <h3>Liste de nos articles</h3>
-<button class="addArticle"><a href="{{ path('app_post_create') }}">Ajouter</a></button>
+<a href="{{ path('app_post_create') }}"><button class="addArticle">Ajouter</button></a>
     <article class="articleMain">
 {% for currentPost in postList %}
     <div class="articleContent">

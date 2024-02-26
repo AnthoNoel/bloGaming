@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_post') }}"><button class="back">Retour</button></a>
+<h1>Ajouter un post avec le composant Formulaire</h1>
+
+
+
+{# {{ form(formPost) }} #}
+
+{{ form_start(formPost) }}
+    {{ form_row(formPost.title) }}
+    {{ form_row(formPost.body) }}
+    {{ form_row(formPost.poster) }}
+    {{ form_row(formPost.publishedAt) }}
+    {{ form_row(formPost.nbLikes) }}
+    {{ form_row(formPost.author) }}
+
+    <button>Créer</button>
+{{ form_end(formPost)}}
+
+
+{% endblock %}
+
