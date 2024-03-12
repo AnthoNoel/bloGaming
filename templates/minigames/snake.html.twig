@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Welcome !
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset( 'assets/css/style.css' )}}">
+{% endblock %}
+{% block body %}
+
+	<h2 class="pt-3">
+		Prêt a devenir le plus grand des snakes ?
+	</h2>
+
+	<main class="bodyGame">
+		<div class="wrapper">
+			<div class="game-details">
+				<span class="score">Score : 0
+				</span>
+				<span class="high-score">High Score : 30
+				</span>
+			</div>
+			<div class="play-board"></div>
+			<div class="up">
+				<i data-key="ArrowUp" class="fa-solid fa-arrow-up-long"></i>
+			</div>
+			<div class="controls">
+				<i data-key="ArrowLeft" class="fa-solid fa-arrow-left-long"></i>
+				<i data-key="ArrowDown" class="fa-solid fa-arrow-down-long"></i>
+				<i data-key="ArrowRight" class="fa-solid fa-arrow-right-long"></i>
+			</div>
+		</div>
+	</main>
+
+
+{% endblock %}

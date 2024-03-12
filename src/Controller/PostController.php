@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/', name: 'app_post')]
+    #[Route('/post', name: 'app_post')]
     public function home(PostRepository $postRepository): Response
     {
         $allPost = $postRepository->findAll();
@@ -100,7 +100,7 @@ class PostController extends AbstractController
         $post = $entityManager->createQueryBuilder()
         ->update('Entity\Post', 'p')
         ->set('p.title', 'coucou')
-        -set('p.body', 'test')
+        ->set('p.body', 'test')
         ->where('p.id =' . $id)
         ->getQuery();
         $postEdit = $post->execute();
@@ -153,12 +153,39 @@ class PostController extends AbstractController
         return $this->redirectToRoute('app_post_read', ["id" => $post->getId()]);
     }
 
-    #[Route('/add2', name: 'add2', methods:"GET")]
-    public function add2(): Response
+    #[Route('/add2', name: 'app_post_add2', methods:["GET", "POST"])]
+    public function add2(Request $request, EntityManagerInterface $em): Response
     {
 
         $post = New Post();
         $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // lorsque l'on arrive ici, les données ont été 1. récupérées 2. validées
+            // Il nous reste à :
+            // 3. traiter le formulaire
+
+             $conditionsAccepted = $form->get('legalMentions')->getData();
+
+ 
+             if ($conditionsAccepted)
+             {
+                 $em->persist($post);
+                 $em->flush();
+     
+                 // 4. rediriger
+                 $this->addFlash('success', 'Article ajouté');
+                 return $this->redirectToRoute('app_post');
+             }
+             else 
+             {
+                // TODO Ajouter une erreur au formulaire
+                $this->addFlash('error', 'Merci d\'accepter les conditions');
+             }
+        }
+
         // affiche le formulaire
         return $this->render('post/add2.html.twig', [
             'formPost' => $form

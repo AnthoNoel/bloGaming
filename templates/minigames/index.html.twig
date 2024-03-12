@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Welcome !
+{% endblock %}
+
+{% block body %}
+
+	<h2 class="pt-3">
+		Retrouvez nos jeux du moments, en mode Rétro !
+	</h2>
+    <div class="container">
+	<div class="card" style="width: 18rem;">
+		<img src="{{ asset('assets/images/snake.jpeg') }}" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">THE SNAKE</h5>
+			<p class="card-text">Retrouvez notre fameux et célébre jeux "Snake" connu sur tous nos nokia3310 ! </p>
+			<a href="{{path('app_minigames_snake')}}"><button type="button" class="nes-btn is-primary">Primary</button></a>
+		</div>
+	</div>
+
+    </div>
+
+
+{% endblock %}

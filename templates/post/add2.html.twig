@@ -10,13 +10,14 @@
 
 {# {{ form(formPost) }} #}
 
-{{ form_start(formPost) }}
+{{ form_start(formPost, {'attr' : {'novalidate' : 'novalidate'}}) }}
     {{ form_row(formPost.title) }}
     {{ form_row(formPost.body) }}
     {{ form_row(formPost.poster) }}
     {{ form_row(formPost.publishedAt) }}
     {{ form_row(formPost.nbLikes) }}
     {{ form_row(formPost.author) }}
+    {{ form_row(formPost.legalMentions) }}
 
     <button>Créer</button>
 {{ form_end(formPost)}}

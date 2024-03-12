@@ -11,8 +11,14 @@
     </div>
 {% endfor %}
 
+{% for message in app.flashes('success') %}
+    <div style="alert alert-sucess">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <h3>Liste de nos articles</h3>
-<a href="{{ path('app_post_create') }}"><button class="addArticle">Ajouter</button></a>
+<a href="{{ path('app_post_add2') }}"><button class="addArticle">Ajouter</button></a>
     <article class="articleMain">
 {% for currentPost in postList %}
     <div class="articleContent">
@@ -24,8 +30,6 @@
 {% endfor %}
     </article>
 
-
-<h3><a href="{{ path('app_post_author') }}">Liste des auteurs</a></h3>
 
 </ul>
 {% endblock %}
