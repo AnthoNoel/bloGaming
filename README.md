@@ -1,3 +1,6 @@
+# BloGaming
+Blogaming est un blog dédié à l'univers du jeu, offrant des articles passionnants sur les dernières nouveautés et tendances, ainsi que des mini-jeux interactifs pour divertir les amateurs de gaming.
+
 # En résumé...
 Ce projet a été réalisé de façon personnelle en parallèle de ma formation de Développeur Web Fullstack PHP au sein de l'école O'clock.
 
